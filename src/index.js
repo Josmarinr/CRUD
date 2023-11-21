@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const usersRoutes = require('./routes/user');
+const tshirtsRoutes = require('./routes/tshirt');
+const ordersRoutes = require('./routes/order');
+
 
 //Swagger
 const swaggerUI = require('swagger-ui-express');
@@ -30,9 +33,11 @@ const port = process.env.PORT || 5000;
 //Middleware
 app.use(express.json());
 app.use('/api', usersRoutes);
+app.use('/api', tshirtsRoutes);
+app.use('/api', ordersRoutes);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggetSpec)));
 
-//Routes
+//Routes    
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });

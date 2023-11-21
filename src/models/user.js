@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Name is required'],
         trim: true
     },
-    age: {
+    cedula: {
         type: Number,
         default: 0,
         validate(value) {
@@ -20,6 +20,16 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Email is required'],
         trim: true,
         lowercase: true
+    },
+    password: {
+        type: String,
+        required: [true, 'Password is required'],
+        trim: true,
+        validate(value) {
+            if(value.length < 6) {
+                throw new Error('Password must be at least 6 characters long');
+            }
+        }
     },
 });
 
