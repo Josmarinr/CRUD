@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, 'Name is required'],
-        trim: true
-    },
     cedula: {
         type: Number,
         default: 0,
@@ -14,6 +9,11 @@ const userSchema = new mongoose.Schema({
                 throw new Error('Age must be a positive number');
             }
         }
+    },
+    name: {
+        type: String,
+        required: [true, 'Name is required'],
+        trim: true
     },
     email: {
         type: String,

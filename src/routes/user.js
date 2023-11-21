@@ -22,10 +22,10 @@ router.get('/users', (req, res) => {
     });
 });
 
-//Get a user by id
-router.get('/users/:id', (req, res) => {
-    const _id = req.params.id;
-    userSchema.findById(_id).then(user => {
+//Get a user by Cedula
+router.get('/users/:cedula', (req, res) => {
+    const _cedula = req.params.cedula;
+    userSchema.find({cedula: _cedula}).then(user => {
         if(!user) {
             return res.status(404).send();
         }
@@ -35,21 +35,21 @@ router.get('/users/:id', (req, res) => {
     });
 });
 
-//Update a user by id
-router.put('/users/:id', (req, res) => {
-    const { id } = req.params;
-    const { name, cedula, email, password } = req.body;
+//Update a user by Cedula
+router.put('/users/:cedula', (req, res) => {
+    const _cedula = req.params.cedula;
+    const { name, email, password } = req.body;
     userSchema
-        .updateOne({_id: id}, { $set: { name, cedula, email, password } })
+        .updateOne({cedula: _cedula}, { $set: { name, email, password } })
         .then(() => {res.status(201).send(user);
     }).catch(err => {
         res.status(400).send(err)});
 });
 
-//Delete a user by id
-router.delete('/users/:id', (req, res) => {
-    const { id } = req.params;
-    userSchema.findByIdAndDelete(id).then(user => {
+//Delete a user by Cedula
+router.delete('/users/:cedula', (req, res) => {
+    const _cedula = req.params.cedula;
+    userSchema.findOneAndDelete({cedula: _cedula}).then(user => {
         if(!user) {
             return res.status(404).send();
         }

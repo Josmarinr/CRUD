@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const tshirtSchema = new mongoose.Schema({
+    code: {
+        type: Number,
+        required: [true, 'Code is required'],
+        trim: true
+    },
     name: {
         type: String,
         required: [true, 'Name is required'],

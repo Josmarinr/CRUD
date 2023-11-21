@@ -22,10 +22,10 @@ router.get('/tshirts', (req, res) => {
     });
 });
 
-//Get a tshirt by id
-router.get('/tshirts/:id', (req, res) => {
-    const _id = req.params.id;
-    tshirtSchema.findById(_id).then(tshirt => {
+//Get a tshirt by Code
+router.get('/tshirts/:code', (req, res) => {
+    const _code = req.params.code;
+    tshirtSchema.find({code: _code}).then(tshirt => {
         if(!tshirt) {
             return res.status(404).send();
         }
@@ -35,21 +35,21 @@ router.get('/tshirts/:id', (req, res) => {
     });
 });
 
-//Update a tshirt by id
-router.put('/tshirts/:id', (req, res) => {
-    const { id } = req.params;
+//Update a tshirt by Code
+router.put('/tshirts/:code', (req, res) => {
+    const _code = req.params.code;
     const { name, size, color, price, stock, image } = req.body;
     tshirtSchema
-        .updateOne({_id: id}, { $set: { name, size, color, price, stock, image } })
+        .updateOne({code: _code}, { $set: { name, size, color, price, stock, image } })
         .then(() => {res.status(201).send(tshirt);
     }).catch(err => {
         res.status(400).send(err)});
 });
 
-//Delete a tshirt by id
-router.delete('/tshirts/:id', (req, res) => {
-    const { id } = req.params;
-    tshirtSchema.findByIdAndDelete(id).then(tshirt => {
+//Delete a tshirt by Code
+router.delete('/tshirts/:code', (req, res) => {
+    const _code = req.params.code;
+    tshirtSchema.findOneAndDelete({code: _code}).then(tshirt => {
         if(!tshirt) {
             return res.status(404).send();
         }
