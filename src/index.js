@@ -17,9 +17,10 @@ app.use('/api', usersRoutes);
 app.use('/api', tshirtsRoutes);
 app.use('/api', ordersRoutes);
 
+
 //Routes    
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.render('index');
 });
 
 //Connect to MongoDB
@@ -31,3 +32,4 @@ mongoose.connect(process.env.MONGO_URI, {
 app.listen(port, () => {
   console.log('Server is listening on port', port);
 });
+

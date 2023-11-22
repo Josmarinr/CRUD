@@ -20,7 +20,10 @@ router.get('/tshirts', (req, res) => {
     }).catch(err => {
         res.status(500).send(err);
     });
+    
 });
+
+
 
 //Get a tshirt by Code
 router.get('/tshirts/:code', (req, res) => {
