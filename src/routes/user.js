@@ -40,8 +40,8 @@ router.put('/users/:cedula', (req, res) => {
     const _cedula = req.params.cedula;
     const { name, email, password } = req.body;
     userSchema
-        .updateMany({cedula: _cedula}, { $set: { name, email, password } })
-        .then(() => {res.status(200).send();
+        .updateOne({cedula: _cedula}, { $set: { name, email, password } })
+        .then(() => {res.status(201).send(user);
     }).catch(err => {
         res.status(400).send(err)});
 });

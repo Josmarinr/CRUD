@@ -20,7 +20,10 @@ router.get('/tshirts', (req, res) => {
     }).catch(err => {
         res.status(500).send(err);
     });
+    
 });
+
+
 
 //Get a tshirt by Code
 router.get('/tshirts/:code', (req, res) => {
@@ -41,7 +44,7 @@ router.put('/tshirts/:code', (req, res) => {
     const { name, size, color, price, stock, image } = req.body;
     tshirtSchema
         .updateOne({code: _code}, { $set: { name, size, color, price, stock, image } })
-        .then(() => {res.status(201).send();
+        .then(() => {res.status(201).send(tshirt);
     }).catch(err => {
         res.status(400).send(err)});
 });
