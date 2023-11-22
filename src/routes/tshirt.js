@@ -41,7 +41,7 @@ router.put('/tshirts/:code', (req, res) => {
     const { name, size, color, price, stock, image } = req.body;
     tshirtSchema
         .updateOne({code: _code}, { $set: { name, size, color, price, stock, image } })
-        .then(() => {res.status(201).send(tshirt);
+        .then(() => {res.status(201).send();
     }).catch(err => {
         res.status(400).send(err)});
 });
